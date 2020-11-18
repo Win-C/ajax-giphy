@@ -10,22 +10,24 @@ $(function(){
     let buttonDown="<button class='down'style='font-size:24px'><i class='fa fa-thumbs-down'></i></button>"
     $(".joke").last().append(buttonUp);
     $(".joke").last().append(buttonDown);
-    $(".joke").last().append(`<span netscore=0>Net Score:0</span>`);
+    $(".up").last().on("click",changeScores);
+    console.log("added eventListners")
+    $(".down").last().on("click",changeScores);
+    $(".joke").last().append(`<span id="netscore" netscore=0>Net Score:0</span>`);
     $(".joke").last().append("<br>");
   }
   function changeScores(evt){
-    let netScore= Number($(evt.target).closest("span").attr("netscore"));
+    let netScoreSpan= $(evt.target).parent().parent().children()[3];
+    let netScore=Number(netScoreSpan.getAttribute("netscore"));
     console.log(netScore, "netscore=");
-    if (evt.target.class==="up"){
+    if ($(evt.target).parent().attr("class")==="up"){
       netScore++;
-      $(evt.target).closest("span").attr("netscore",netScore);
-      $(evt.target).closest("span").text(`Net Score:${netScore}`);
     }
-    if (evt.target.class==="down"){
+    if ($(evt.target).parent().attr("class")==="down"){
       netScore--;
-      $(evt.target).closest("span").attr("netscore",netScore);
-      $(evt.target).closest("span").text(`Net Score:${netScore}`);
     }
+    netScoreSpan.setAttribute("netscore",netScore);
+    netScoreSpan.innerText=`Net Score:${netScore}`;
   }
 
   async function getJokes(){
@@ -36,11 +38,4 @@ $(function(){
     }
   }
   getJokes();
-  for (button of $(".up")){
-    console.log(button);
-    button.on("click",changeScores);
-  }
-  for (button of $(".down")){
-    button.on("click",changeScores);
-  }
 })
