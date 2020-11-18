@@ -4,13 +4,17 @@
 <head>
   <meta charset="UTF-8">
   <title>Giphy Party!</title>
+  
 </head>
 
 <body>
+  <form id= "gif_form"action="">
     <input type="text" id="q" placeholder="Enter a search term">
-    <button id="submit">Submit</button>
-    <button id="remove">Remove Images</button>
-  <div class="gifs"></div>
+    <button type="submit" id="submit">Submit</button>
+    <button type= "button" id="remove">Remove Images</button>
+  </form>
+    
+<div class="gifs"></div>
 <script src="https://unpkg.com/jquery"></script>
 <script src="https://unpkg.com/axios/dist/axios.js"></script>
 <script src="app.js"></script>
